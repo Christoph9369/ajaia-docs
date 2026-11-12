@@ -21,6 +21,12 @@ Read `README.md` for features and scripts, `ARCHITECTURE.md` for design decision
 - Never print or commit `.env` values or credentials.
 - Do not push to a remote. The user pushes.
 
+## Design rules
+
+- No React Bits or decorative animated components (shaders, particles, glitch/scramble text, animated backgrounds). GSAP only with explicit approval, and only for the workflow component.
+- Stay on Tailwind and the tokens in `globals.css`; no new fonts, animation libraries or visual direction without approval.
+- Design changes must update the visual baselines (see README, "Visual and accessibility checks").
+
 ## How to work (Karpathy guidelines)
 
 Project rules above take precedence over these general guidelines.

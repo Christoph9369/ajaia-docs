@@ -12,6 +12,18 @@ Installed 2026-11-12 with `npx skills@latest add ... -a claude-code --copy` into
 
 Content hashes: see `skills-lock.json`.
 
+## Phase 2: visual checks (exact versions, devDependencies)
+
+| Package | Version | Use |
+|---|---|---|
+| @playwright/test | 1.65.0 | e2e a11y and visual specs |
+| @axe-core/playwright | 4.14.0 | WCAG 2.2 AA checks |
+| @playwright/cli | 0.1.24 | `playwright-cli`, Claude's browser; skill in `.claude/skills/playwright-cli` |
+| designlang (npx, not installed) | 13.4.1 | one-off drift check of our own site; never `apply`, never `--smart` |
+| Docker image | `mcr.microsoft.com/playwright:v1.65.0-noble` | baselines and the CI `e2e` job; must match @playwright/test |
+
+Playwright skill permissions narrowed: `allowed-tools: Bash(playwright-cli:*)` only (removed `Bash(npx playwright:*)` and `Bash(npx --no-install playwright:*)`). Not installed: React Bits, GSAP or any animation library.
+
 ## Notes
 - `grilling` was added because `grill-me` only calls it; without it `grill-me` does nothing.
 - Not installed: `to-prd`, `to-issues`/`prd-to-issues`, `triage-issue` (not in the repo under those names; closest are `to-spec`, `to-tickets`, `triage`). Awaiting decision.

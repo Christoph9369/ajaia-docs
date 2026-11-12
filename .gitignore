@@ -6,3 +6,9 @@ node_modules
 next-env.d.ts
 .vercel
 .impeccable/
+# Playwright CLI output (may contain credentials)
+.playwright-cli/
+
+qa/
+playwright-report/
+test-results/
