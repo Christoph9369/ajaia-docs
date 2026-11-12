@@ -70,6 +70,7 @@ export function Dashboard({ owned, shared }: { owned: DocumentSummary[]; shared:
             accept={ACCEPT}
             className="sr-only"
             id="import-file"
+            aria-label="Import file"
             data-testid="import-input"
             onChange={(e) => e.target.files?.[0] && importFile(e.target.files[0])}
           />
@@ -119,7 +120,7 @@ function Section(props: {
       <div className="mb-3 flex items-baseline justify-between">
         <div>
           <h2 id={headingId} className="text-base font-semibold">
-            {props.title} <span className="ml-1 text-sm font-normal text-muted">{props.docs.length}</span>
+            {props.title} <span className="ml-1.5 rounded-full bg-black/5 px-2 py-0.5 text-xs font-medium tabular-nums text-muted">{props.docs.length}</span>
           </h2>
           <p className="text-xs text-muted">{props.subtitle}</p>
         </div>

@@ -5,7 +5,7 @@ import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { UserMenu } from "@/components/AppHeader";
+import { AppHeader } from "@/components/AppHeader";
 import { Alert, Button, RoleBadge, formatRelative } from "@/components/ui";
 import type { DocumentDetail } from "@/lib/documents";
 import { ShareDialog } from "./ShareDialog";
@@ -77,44 +77,48 @@ export function DocumentEditor({ initial, currentUser }: { initial: DocumentDeta
 
   return (
     <div className="min-h-screen">
-      <header className="sticky top-0 z-20 border-b border-line bg-white">
-        <div className="flex h-14 items-center gap-3 px-4">
-          <Link href="/documents" className="rounded-md p-1.5 text-muted hover:bg-black/5 hover:text-ink" aria-label="Back to documents" title="Back to documents">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden>
-              <path d="M15 18l-6-6 6-6" />
-            </svg>
-          </Link>
-          <div className="min-w-0 flex-1">
-            <input
-              value={title}
-              onChange={(e) => onTitleChange(e.target.value)}
-              onBlur={onTitleBlur}
-              onKeyDown={(e) => e.key === "Enter" && editor?.commands.focus("start")}
-              readOnly={!canEdit}
-              maxLength={200}
-              aria-label="Document title"
-              className="w-full max-w-xl truncate rounded-md border border-transparent bg-transparent px-1.5 py-0.5 text-lg font-medium hover:border-line focus:border-accent focus:outline-none read-only:hover:border-transparent"
-            />
-            <div className="flex items-center gap-2 px-1.5 text-xs text-muted">
+      <div className="sticky top-0 z-30">
+        <AppHeader user={currentUser} sticky={false} />
+        <div className="border-b border-line bg-white">
+          <div className="mx-auto max-w-5xl px-4 py-2">
+            <div className="flex items-center gap-2">
+              <Link href="/documents" className="rounded-md p-1.5 text-muted hover:bg-black/5 hover:text-ink" aria-label="Back to documents" title="Back to documents">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden>
+                  <path d="M15 18l-6-6 6-6" />
+                </svg>
+              </Link>
+              <input
+                value={title}
+                onChange={(e) => onTitleChange(e.target.value)}
+                onBlur={onTitleBlur}
+                onKeyDown={(e) => e.key === "Enter" && editor?.commands.focus("start")}
+                readOnly={!canEdit}
+                maxLength={200}
+                aria-label="Document title"
+                className="min-w-0 flex-1 truncate rounded-md border border-transparent bg-transparent px-1.5 py-0.5 text-lg font-semibold hover:border-line focus:border-accent focus:outline-none read-only:hover:border-transparent"
+              />
+              <Button variant={isOwner ? "primary" : "secondary"} onClick={() => setShareOpen(true)}>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden>
+                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8M19 8v6M22 11h-6" />
+                </svg>
+                {isOwner ? "Share" : "People"}
+              </Button>
+            </div>
+            <div className="flex flex-wrap items-center gap-x-2 gap-y-1 pl-11 text-xs text-muted">
               <RoleBadge role={initial.access} />
               {!isOwner && <span>Owned by {initial.owner.name}</span>}
               <SaveIndicator status={save.status} lastSavedAt={save.lastSavedAt} canEdit={canEdit} />
             </div>
           </div>
-          <Button variant={isOwner ? "primary" : "secondary"} onClick={() => setShareOpen(true)}>
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden>
-              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8M19 8v6M22 11h-6" />
-            </svg>
-            {isOwner ? "Share" : "People"}
-          </Button>
-          <UserMenu user={currentUser} />
+          {canEdit && editor && (
+            <div className="border-t border-line bg-[#f8f9fb]">
+              <div className="mx-auto max-w-5xl">
+                <Toolbar editor={editor} />
+              </div>
+            </div>
+          )}
         </div>
-        {canEdit && editor && (
-          <div className="border-t border-line bg-[#f8f9fb]">
-            <Toolbar editor={editor} />
-          </div>
-        )}
-      </header>
+      </div>
 
       <div className="mx-auto max-w-[850px] px-4 py-8">
         {!canEdit && (

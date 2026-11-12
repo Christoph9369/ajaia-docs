@@ -46,7 +46,12 @@ export function LoginPicker({ users }: { users: DemoUser[] }) {
                 <span className="block text-sm font-medium">{u.name}</span>
                 <span className="block text-xs text-muted">{u.email}</span>
               </span>
-              <span className="text-sm text-accent">{pending === u.email ? "Signing in…" : "Continue →"}</span>
+              <span className="flex items-center gap-1 text-sm text-accent">
+                {pending === u.email ? "Signing in…" : "Continue"}
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden>
+                  <path d="M9 6l6 6-6 6" />
+                </svg>
+              </span>
             </button>
           </li>
         ))}

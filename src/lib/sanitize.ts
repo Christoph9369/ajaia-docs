@@ -28,7 +28,12 @@ export function sanitizeDocumentHtml(html: string): string {
 }
 
 /** Plain-text snippet for dashboard previews. */
-export function htmlToSnippet(html: string, max = 140): string {
+export function htmlToSnippet(html: string, max = 140, title?: string): string {
+  // The editor's first heading usually repeats the title; dropping it keeps the preview from reading as a duplicate.
+  const lead = /^\s*<h[1-6][^>]*>([\s\S]*?)<\/h[1-6]>/i.exec(html);
+  if (title && lead && lead[1].replace(/<[^>]*>/g, "").trim().toLowerCase() === title.trim().toLowerCase()) {
+    html = html.slice(lead[0].length);
+  }
   const text = sanitizeHtml(html.replace(/<\/(p|h[1-6]|li)>/g, " "), { allowedTags: [], allowedAttributes: {} })
     .replace(/&nbsp;/g, " ")
     .replace(/&amp;/g, "&")

@@ -8,7 +8,7 @@
 | Walkthrough video | see `VIDEO_URL.txt` |
 | Test accounts | `alice@ajaia.dev`, `bob@ajaia.dev`, `carol@ajaia.dev`. Pick one on the login screen; no password. |
 
-**Fastest review path:** sign in as Alice, open *Welcome to Ajaia Docs* and click **Share**. Then use **Switch user** to sign in as Bob (can edit) and Carol (view only).
+**Fastest review path:** sign in as Alice, open *Welcome to Ajaia Docs* and click **Share**. Then open the avatar menu, choose **Sign out**, and sign in as Bob (can edit) and Carol (view only).
 
 ## What's included
 

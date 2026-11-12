@@ -10,7 +10,7 @@ A lightweight collaborative document editor: create and format documents in the 
 | `bob@ajaia.dev` | Editor on Alice's doc; owns *Bob's private notes* |
 | `carol@ajaia.dev` | Viewer on Alice's doc (read-only editor) |
 
-Auth is mocked on purpose (see [ARCHITECTURE.md](./ARCHITECTURE.md)). There are no passwords; use **Switch user** in the header to change accounts.
+Auth is mocked on purpose (see [ARCHITECTURE.md](./ARCHITECTURE.md)). There are no passwords; open the avatar menu in the header and choose **Sign out** to change accounts.
 
 ![Editor](docs/screenshots/03-editor-formatting.png)
 

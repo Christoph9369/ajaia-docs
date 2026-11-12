@@ -7,7 +7,7 @@ export function cx(...parts: Array<string | false | null | undefined>) {
 type Variant = "primary" | "secondary" | "ghost" | "danger";
 
 const VARIANTS: Record<Variant, string> = {
-  primary: "bg-accent text-white hover:bg-[#244bd0] disabled:bg-accent/50",
+  primary: "bg-accent text-white hover:bg-accent-strong disabled:bg-line disabled:text-muted",
   secondary: "bg-white text-ink border border-line hover:bg-gray-50 disabled:text-muted",
   ghost: "text-ink hover:bg-black/5 disabled:text-muted",
   danger: "bg-red-600 text-white hover:bg-red-700",
@@ -31,6 +31,21 @@ export function Button({
   );
 }
 
+function channel(v: number) {
+  const c = v / 255;
+  return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
+}
+
+/** User colours come from data; darken any that cannot carry white text at WCAG AA (4.5:1). */
+export function readableAvatarColor(hex: string) {
+  const m = /^#([0-9a-f]{6})$/i.exec(hex);
+  if (!m) return hex;
+  let rgb = [0, 2, 4].map((i) => parseInt(m[1].slice(i, i + 2), 16));
+  const contrast = () => 1.05 / (0.2126 * channel(rgb[0]) + 0.7152 * channel(rgb[1]) + 0.0722 * channel(rgb[2]) + 0.05);
+  while (contrast() < 4.5) rgb = rgb.map((v) => Math.floor(v * 0.94));
+  return `#${rgb.map((v) => v.toString(16).padStart(2, "0")).join("")}`;
+}
+
 export function Avatar({ name, color, size = 28 }: { name: string; color: string; size?: number }) {
   const initials = name
     .split(/\s+/)
@@ -42,7 +57,7 @@ export function Avatar({ name, color, size = 28 }: { name: string; color: string
     <span
       aria-hidden
       className="inline-flex shrink-0 items-center justify-center rounded-full font-semibold text-white"
-      style={{ background: color, width: size, height: size, fontSize: size * 0.4 }}
+      style={{ background: readableAvatarColor(color), width: size, height: size, fontSize: size * 0.4 }}
     >
       {initials}
     </span>

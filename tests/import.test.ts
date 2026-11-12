@@ -65,6 +65,11 @@ describe("helpers", () => {
   it("textToHtml normalises Windows line endings", () => {
     expect(textToHtml("a\r\n\r\nb")).toBe("<p>a</p><p>b</p>");
   });
+  it("htmlToSnippet drops a leading heading that repeats the title", () => {
+    expect(htmlToSnippet("<h1>My Plan</h1><p>First step.</p>", 140, "my plan")).toBe("First step.");
+    expect(htmlToSnippet("<h1>Other</h1><p>First step.</p>", 140, "My Plan")).toBe("Other First step.");
+  });
+
   it("htmlToSnippet produces readable plain text", () => {
     expect(htmlToSnippet("<h1>Hi</h1><p>there &amp; you</p>")).toBe("Hi there & you");
   });

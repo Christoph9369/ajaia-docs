@@ -98,7 +98,7 @@ export async function listDocuments(db: DB, userId: string) {
   const toSummary = (r: (typeof rows)[number]): DocumentSummary => ({
     id: r.id,
     title: r.title,
-    snippet: htmlToSnippet(r.content),
+    snippet: htmlToSnippet(r.content, undefined, r.title),
     updatedAt: r.updatedAt.toISOString(),
     owner: { id: r.ownerId, name: r.ownerName },
     access: r.ownerId === userId ? "owner" : (r.myRole ?? "viewer"),

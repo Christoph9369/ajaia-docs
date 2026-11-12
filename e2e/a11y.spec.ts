@@ -8,10 +8,7 @@ const TAGS = ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"];
  * Violations that exist in today's approved design and are tracked in docs/design/AUDIT-2026-11.md.
  * Scoped to one route and one rule so any NEW violation still fails. Delete an entry when its fix lands.
  */
-const KNOWN_ISSUES: Record<string, Record<string, string>> = {
-  "/login": { "color-contrast": "audit #1: white text on #059669 / #d97706 avatars" },
-  "/documents": { label: "audit #9: file input #import-file has no accessible label" },
-};
+const KNOWN_ISSUES: Record<string, Record<string, string>> = {};
 
 for (const theme of THEMES) {
   test.describe(`axe, ${theme} scheme`, () => {
