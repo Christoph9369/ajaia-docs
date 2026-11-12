@@ -19,7 +19,7 @@
     "test:e2e:update": "playwright test --update-snapshots"
   },
   "engines": {
-    "node": ">=20"
+    "node": "22.x"
   },
   "dependencies": {
     "@tiptap/extension-placeholder": "^3.33.1",

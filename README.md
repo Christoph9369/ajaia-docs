@@ -26,7 +26,7 @@ Auth is mocked on purpose (see [ARCHITECTURE.md](./ARCHITECTURE.md)). There are 
 
 ## Run locally
 
-Requires **Node 20+** and **Postgres 14+**.
+Requires **Node 22.12+** and **Postgres 14+**.
 
 ```bash
 git clone <repo> ajaia-docs && cd ajaia-docs
