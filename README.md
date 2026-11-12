@@ -97,3 +97,18 @@ e2e/smoke.py            Playwright end-to-end flow
 - Auth is simulated with seeded accounts, and sharing only works with existing accounts (no invites).
 
 See [ARCHITECTURE.md](./ARCHITECTURE.md) for the reasoning behind these choices and what I'd build next.
+
+## Visual and accessibility checks (Playwright)
+
+`npm run test:e2e` runs `e2e/a11y.spec.ts` (axe, WCAG 2.2 AA, every route in `src/app`, light and dark scheme) and `e2e/visual.spec.ts` (screenshots at 1280 and 390px) against a **running production server** at `BASE_URL` (default `http://localhost:3100`). It needs a freshly seeded database (`npm run db:setup`).
+
+Baselines in `e2e/__screenshots__/` must be generated on Linux, so they match CI. Use the official image that matches the pinned `@playwright/test` version (1.65.0):
+
+```bash
+npm run build && PORT=3100 npm start &     # app on the host, against a freshly seeded DB
+docker run --rm --ipc=host -v "$PWD":/work -w /work \
+  -e BASE_URL=http://host.docker.internal:3100 \
+  mcr.microsoft.com/playwright:v1.65.0-noble npm run test:e2e:update
+```
+
+Commit the changed PNGs and explain the intentional design change in the PR. Never update baselines to make an unexplained diff pass. The CI `e2e` job uploads the Playwright report as an artifact when it fails.
