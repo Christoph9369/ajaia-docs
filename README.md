@@ -2,7 +2,7 @@
 
 A lightweight collaborative document editor: create and format documents in the browser, import files, and share them with teammates as editors or viewers.
 
-**Live demo:** `<LIVE_URL>`. No sign-up is needed: pick a demo account on the login screen.
+**Live demo:** `ajaia-docs-sigma-ten.vercel.app`. No sign-up is needed: pick a demo account on the login screen.
 
 | Demo account | Role in the seeded data |
 | --- | --- |
