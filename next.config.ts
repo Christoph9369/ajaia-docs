@@ -1,8 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // mammoth and sanitize-html are Node-only; keep them out of the bundler.
-  serverExternalPackages: ["mammoth", "sanitize-html"],
+  // mammoth is Node-only; keep it out of the bundler.
+  // sanitize-html must be bundled, not externalized: it require()s the ESM-only htmlparser2,
+  // which crashes at runtime on Node versions without require(esm) (seen on Vercel).
+  serverExternalPackages: ["mammoth"],
 };
 
 export default nextConfig;
