@@ -4,7 +4,7 @@
 
 | | |
 | --- | --- |
-| Live product | `<LIVE_URL>` |
+| Live product | `ajaia-docs-sigma-ten.vercel.app` |
 | Walkthrough video | see `VIDEO_URL.txt` |
 | Test accounts | `alice@ajaia.dev`, `bob@ajaia.dev`, `carol@ajaia.dev`. Pick one on the login screen; no password. |
 
