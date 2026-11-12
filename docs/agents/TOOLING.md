@@ -20,7 +20,7 @@ Content hashes: see `skills-lock.json`.
 | @axe-core/playwright | 4.14.0 | WCAG 2.2 AA checks |
 | @playwright/cli | 0.1.24 | `playwright-cli`, Claude's browser; skill in `.claude/skills/playwright-cli` |
 | designlang (npx, not installed) | 13.4.1 | one-off drift check of our own site; never `apply`, never `--smart` |
-| Docker image | `mcr.microsoft.com/playwright:v1.65.0-noble` | baselines and the CI `e2e` job; must match @playwright/test |
+| CI container image | `mcr.microsoft.com/playwright:v1.65.0-noble` | used on GitHub runners only (e2e job, update-baselines workflow); must match @playwright/test. No local Docker needed |
 
 Playwright skill permissions narrowed: `allowed-tools: Bash(playwright-cli:*)` only (removed `Bash(npx playwright:*)` and `Bash(npx --no-install playwright:*)`). Not installed: React Bits, GSAP or any animation library.
 
