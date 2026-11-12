@@ -33,7 +33,8 @@ git clone <repo> ajaia-docs && cd ajaia-docs
 npm install
 cp .env.example .env            # defaults point at localhost:5432
 
-# Start Postgres (skip if you already have one; then create databases "docs" and "docs_test")
+# Database: put a Neon connection string in .env (what the deployed app uses), or
+# optionally start a local Postgres with Docker (then create databases "docs" and "docs_test"):
 docker compose up -d
 
 npm run db:setup                # apply migrations and seed demo users/docs
@@ -55,14 +56,15 @@ npm run dev                     # http://localhost:3000
 npm test
 ```
 
-There are 32 tests in four files:
+There are 35 tests in five files:
 
 - `tests/permissions.test.ts` covers the role/permission matrix.
 - `tests/session.test.ts` checks that session cookies can't be forged or swapped.
+- `tests/avatar.test.ts` checks that avatar colours are darkened to meet 4.5:1 text contrast.
 - `tests/import.test.ts` covers .txt/.md/.docx conversion (including a real .docx fixture), XSS stripping, and rejection of unsupported, empty, oversized and corrupt files.
 - `tests/documents.integration.test.ts` runs against **real Postgres**. It covers the private-until-shared flow, editor vs viewer vs owner rights, stale-write conflict detection, role changes and revocation, and server-side sanitization.
 
-There is also a browser smoke test of the whole user flow (`e2e/smoke.py`, Playwright). It produced the screenshots in `docs/screenshots/`. CI (`.github/workflows/ci.yml`) runs the typecheck, the tests against a Postgres service, and a build.
+There is also a browser smoke test of the whole user flow (`e2e/smoke.py`, Playwright). It produced the screenshots in `docs/screenshots/`. CI (`.github/workflows/ci.yml`) runs the typecheck, the tests against a Postgres service, a build, and the Playwright accessibility and visual checks.
 
 ## Deploy (Vercel + Neon, both free)
 

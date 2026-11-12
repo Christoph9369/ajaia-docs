@@ -20,11 +20,12 @@
 | `AI_WORKFLOW.md` | AI workflow note |
 | `SUBMISSION.md` | This file |
 | `VIDEO_URL.txt` | Walkthrough video link |
-| `tests/` | Vitest unit + Postgres integration tests (32) and the `.docx` fixture |
+| `tests/` | Vitest unit + Postgres integration tests (35) and the `.docx` fixture |
 | `e2e/smoke.py` | Playwright end-to-end flow |
+| `e2e/*.spec.ts`, `playwright.config.ts` | Accessibility (axe) and visual regression checks run in CI |
 | `docs/screenshots/` | Screenshots of each main screen and state |
-| `.github/workflows/ci.yml` | CI: typecheck, tests against Postgres, build |
-| `docker-compose.yml` | Local Postgres for running the project |
+| `.github/workflows/` | CI: typecheck, tests against Postgres, build, e2e; manual workflow to update visual baselines |
+| `docker-compose.yml` | Optional local Postgres for development. The deployed app uses Neon on Vercel, so Docker is not required |
 
 ## Status
 
